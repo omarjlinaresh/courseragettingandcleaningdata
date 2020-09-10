@@ -30,29 +30,29 @@ subject <- rbind(subject_test, subject_train)
 data <- cbind(subject, X, y)
 
 #Extracts only the measurements on the mean and standard deviation for each measurement.
-final_data <- data %>% select(subject, code, contains("mean"), contains("std"), contains("Mean"))
+definitive_data <- data %>% select(subject, code, contains("mean"), contains("std"), contains("Mean"))
 
 # name the activities in the data set
-final_data$code <- activity_labels[final_data$code, 2]
+definitive_data$code <- activity_labels[definitive_data$code, 2]
 
 # labels the data set with descriptive variable names
-names(final_data)[2] = "activity"
-names(final_data)<-gsub("^t", "time", names(final_data))
-names(final_data)<-gsub("^f", "frequency", names(final_data))
-names(final_data)<-gsub("Acc", "accelerometer", names(final_data))
-names(final_data)<-gsub("Gyro", "gyroscope", names(final_data))
-names(final_data)<-gsub("BodyBody", "body", names(final_data))
-names(final_data)<-gsub("Mag", "magnitude", names(final_data))
-names(final_data)<-gsub("tBody", "timeBody", names(final_data))
-names(final_data)<-gsub("-mean()", "mean", names(final_data), ignore.case = TRUE)
-names(final_data)<-gsub("-std()", "std", names(final_data), ignore.case = TRUE)
-names(final_data)<-gsub("-freq()", "frequency", names(final_data), ignore.case = TRUE)
+names(definitive_data)[2] = "activity"
+names(definitive_data)<-gsub("^t", "time", names(definitive_data))
+names(definitive_data)<-gsub("^f", "frequency", names(definitive_data))
+names(definitive_data)<-gsub("Acc", "accelerometer", names(definitive_data))
+names(definitive_data)<-gsub("Gyro", "gyroscope", names(definitive_data))
+names(definitive_data)<-gsub("BodyBody", "body", names(definitive_data))
+names(definitive_data)<-gsub("Mag", "magnitude", names(definitive_data))
+names(definitive_data)<-gsub("tBody", "timeBody", names(definitive_data))
+names(definitive_data)<-gsub("-mean()", "mean", names(definitive_data), ignore.case = TRUE)
+names(definitive_data)<-gsub("-std()", "std", names(definitive_data), ignore.case = TRUE)
+names(definitive_data)<-gsub("-freq()", "frequency", names(definitive_data), ignore.case = TRUE)
 
 
 #creates a second, independent tidy data set with the average of each variable for each activity and each subject 
-final_data2 <- final_data %>% 
+definitive_data2 <- definitive_data %>% 
                group_by(activity, subject) %>%
                summarise_all(funs(mean)) %>%
                arrange(subject) #ordered by subject to make easier the reading of the table
-write.table(final_data2, "tidydata.txt", row.name=FALSE)
+write.table(definitive_data2, "tidydata.txt", row.name=FALSE)
                 
