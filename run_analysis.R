@@ -54,5 +54,5 @@ final_data2 <- final_data %>%
                group_by(activity, subject) %>%
                summarise_all(funs(mean)) %>%
                arrange(subject) #ordered by subject to make easier the reading of the table
-write.table(final_data2, "TidyData.txt", row.name=FALSE)
+write.table(final_data2, "tidydata.txt", row.name=FALSE)
                 
